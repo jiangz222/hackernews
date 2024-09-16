@@ -11,13 +11,13 @@ func TestClient(t *testing.T) {
 	ast := assert.New(t)
 
 	c := NewClient()
-	stories, err := c.GetTopStoryIds(3)
+	storyIds, err := c.GetTopStoryIds(3)
 	ast.Nil(err)
-	ast.Len(stories.Ids, 3)
+	ast.Len(storyIds.Ids, 3)
 
-	story, err := c.GetStory(stories.Ids[0])
+	story, err := c.GetStory(storyIds.Ids[0])
 	ast.Nil(err)
-	ast.Equal(stories.Ids[0], story.ID)
+	ast.Equal(storyIds.Ids[0], story.ID)
 
 	comment, err := c.GetComment(story.Kids[0])
 	ast.Nil(err)
