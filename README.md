@@ -1,2 +1,4 @@
 # go-hackernews-client
-golang client for hackerNews https://news.ycombinator.com/news
+Golang client for hackerNews https://news.ycombinator.com/news
+
+Based on [Official API](https://github.com/HackerNews/API)
