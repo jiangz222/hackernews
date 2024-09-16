@@ -5,8 +5,8 @@
 
 # Usage
 ```golang
-	c := NewClient()
-
+    c := NewClient()
+    
     storyIds, err := c.GetTopStoryIds(3)
     
     story, err := c.GetStory(storyIds.Ids[0])
