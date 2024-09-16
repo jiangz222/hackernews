@@ -1,4 +1,4 @@
-module hackernews
+module github.com/jiangz222/hackernews
 
 go 1.21.4
 
