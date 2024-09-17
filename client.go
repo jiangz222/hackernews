@@ -36,16 +36,16 @@ func (c *Client) GetTopStoryIds(limit int) (*TopStoryIds, error) {
 
 // Story basic information of Story
 type Story struct {
-	By          string     `json:"by"`
-	Descendants int        `json:"descendants"` // numbers of comments
-	ID          uint32     `json:"id"`
-	Kids        []uint32   `json:"kids"`
-	Score       int        `json:"score"`
-	Time        int64      `json:"time"` // unix seconds
-	Title       string     `json:"title"`
-	Type        string     `json:"type"`
-	URL         string     `json:"url"`      // url to original new
-	Comments    []*Comment `json:"comments"` // unsupported by official API
+	By          string    `json:"by"`
+	Descendants int       `json:"descendants"` // numbers of comments
+	ID          uint32    `json:"id"`
+	Kids        []uint32  `json:"kids"`
+	Score       int       `json:"score"`
+	Time        int64     `json:"time"` // unix seconds
+	Title       string    `json:"title"`
+	Type        string    `json:"type"`
+	URL         string    `json:"url"`      // url to original new
+	Comments    []Comment `json:"comments"` // unsupported by official API
 }
 
 func (c *Client) GetStory(id uint32) (*Story, error) {
@@ -55,19 +55,19 @@ func (c *Client) GetStory(id uint32) (*Story, error) {
 }
 
 type Comment struct {
-	By       string     `json:"by"`
-	ID       uint32     `json:"id"`
-	Kids     []uint32   `json:"kids"`
-	Parent   uint32     `json:"parent"`
-	Text     string     `json:"text"`
-	Time     int        `json:"time"` // unix seconds
-	Type     string     `json:"type"`
-	Comments []*Comment `json:"comments"` // unsupported by official API
+	By       string    `json:"by"`
+	ID       uint32    `json:"id"`
+	Kids     []uint32  `json:"kids"`
+	Parent   uint32    `json:"parent"`
+	Text     string    `json:"text"`
+	Time     int       `json:"time"` // unix seconds
+	Type     string    `json:"type"`
+	Comments []Comment `json:"comments"` // unsupported by official API
 }
 
-func (c *Client) GetComment(id uint32) (*Comment, error) {
-	s := &Comment{}
-	err := get(fmt.Sprintf(commentUrl, id), s)
+func (c *Client) GetComment(id uint32) (Comment, error) {
+	s := Comment{}
+	err := get(fmt.Sprintf(commentUrl, id), &s)
 	return s, err
 }
 
@@ -87,7 +87,7 @@ func (c *Client) GetAllComments(storyId uint32, limit int, depth int) (*Story, e
 }
 
 // getKidComments get comments
-func (c *Client) getKidComments(kids []uint32, limit, depth int) (comments []*Comment) {
+func (c *Client) getKidComments(kids []uint32, limit, depth int) (comments []Comment) {
 	if depth == 0 || len(kids) == 0 {
 		return nil
 	}
